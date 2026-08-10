@@ -465,19 +465,43 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 7px;
+            left: 50%
             top: 0;
             bottom: 0;
             width: 2px;
             background: var(--border-color);
+            transform: translateX(-50%);
         }
 
         .timeline-item {
             position: relative;
-            margin-bottom: 2.5rem;
+            width: 50%
+            padding: 1rem 2.5rem;
+            box-sizing: border-box;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item.left {
+        left: 0;
+        text-align: right;
+        }
+        
+        .timeline-item.right {
+        left: 50%;
+        text-align: left;
         }
 
-        /* Titik (Node) Neon pada Garis Timeline */
+        .timeline-item.left .timeline-dot {
+        right: -8px;
+        }
+
+        .timeline-item.right .timeline-dot {
+        left: -8px;
+        }
+        
+        .timeline-item.left .timeline-gallery {
+        justify-content: flex-end;
+        }
+
         .timeline-dot {
             position: absolute;
             left: -2rem;
@@ -776,7 +800,7 @@
         <div class="timeline reveal">
             
             <!-- Pengalaman 1 (Terbaru) -->
-            <div class="timeline-item">
+            <div class="timeline-item left">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2026 - Sekarang</div>
                 <div class="timeline-content">
@@ -793,7 +817,7 @@
             </div>
 
             <!-- Pengalaman 2 -->
-            <div class="timeline-item">
+            <div class="timeline-item right">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2023 - 2024</div>
                 <div class="timeline-content">
