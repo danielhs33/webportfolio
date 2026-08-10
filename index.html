@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Daniel Hendriko Sirait</title>
+    <!-- FontAwesome untuk Icon/Logo Software -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        
+  /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --bg-primary: #0a0f1d;
+            --bg-secondary: #111827;
+            --bg-card: #1f293d;
+            --accent-color: #00f0ff; /* Electric Cyan */
+            --accent-glow: rgba(0, 240, 255, 0.3);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #374151;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        /* 1. BACKGROUND UTAMA WEBSITE (BERGRADASI HALUS & GELAP) */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+
+            /* Warna dasar disamakan persis dengan warna dark navy Hero */
+            background-color: #080d1a;
+
+            /* Gradasi Pendaran (Radial Glow) di Latar Belakang Section */
+            background-image: 
+                /* Glow Cyan halus di area Skills & Education */
+                radial-gradient(circle at 10% 30%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
+                /* Glow Navy/Cyan di area Pengalaman */
+                radial-gradient(circle at 90% 65%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
+                /* Glow di area Achievement & Footer */
+                radial-gradient(circle at 20% 90%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
+                /* Gradasi Linear dari atas ke bawah agar tetap selaras */
+                linear-gradient(180deg, #080d1a 0%, #0d1527 50%, #050811 100%);
+            
+            /* Agar efek gradasi mengunci saat di-scroll, bikin alur layarnya halus */
+            background-attachment: fixed;
+        }
+
+        /* 2. BIKIN SEMUA SECTION DIBANTING TRANSPARAN BIAR GRADASI BODY KELIHATAN */
+        section,
+        #education,
+        #skills,
+        #experience,
+        #achievements {
+            background-color: transparent !important;
+        }
+
+        /* 3. BIKIN KARTU-KARTU (SKILLS, EDUCATION, ACHIEVEMENTS) DENGAN WARNA DARK KONTRAST */
+        .skill-card,
+        .edu-card,
+        .timeline-content,
+        .card,
+        .software-card {
+            background: rgba(18, 26, 45, 0.7) !important; /* Biru dark transparan halus */
+            backdrop-filter: blur(8px);                    /* Efek kaca frost futuristik */
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .skill-card:hover,
+        .edu-card:hover,
+        .timeline-content:hover,
+        .card:hover,
+        .software-card:hover {
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.15) !important;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 15, 29, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- SECTION BASE --- */
+        section {
+            padding: 6rem 8% 4rem;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* --- HERO SECTION --- */
+    /* 1. MENSAMAKAN URUTAN POSISI LAYER (Z-INDEX) */
+        #hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 9rem 8% 6rem;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        /* GIF TETAP TERANG DI PALING BELAKANG */
+       .hero-bg-gif {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            z-index: 1 !important;
+            
+            /* 1. MENSAMARKAN GIF (EFEK BLUR) */
+            filter: blur(6px) !important; /* Nilai 4px bikin samar pas. Kalau mau lebih samar ganti ke 6px */
+
+            /* 2. MEREDUPKAN GIF */
+            opacity: 0.25 !important;    /* Nilai 0.25 bikin samar & ga terlalu nyetrum di mata */
+
+            mix-blend-mode: screen !important;
+            pointer-events: none !important;
+        }
+
+        /* OVERLAY DIHAPUS EFEK GELAPNYA BIAR GAK NIMPULIN FOTO */
+        .hero-overlay {
+            display: none !important; /* DIBUANG BIAR GAK DAPAT BAYANGAN HITAM DI FOTO */
+        }
+
+        /* TEKS DAN FOTO DIPAKSA NAIK KE ATAS KANVAS (TIDAK KETUTUP) */
+        .hero-text,
+        .hero-img-wrapper {
+            position: relative !important;
+            z-index: 10 !important; /* LAYER 10 (PALING ATAS) */
+        }
+
+        /* BIKIN FOTO PROFIL KELIHATAN TERANG & JELAS */
+        .hero-img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 25px var(--accent-glow);
+            background-color: var(--bg-card); /* Mencegah foto tembus pandang */
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .hero-info-list {
+            margin-bottom: 2rem;
+            list-style: none;
+        }
+
+        .hero-info-list li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-info-list i {
+            color: var(--accent-color);
+        }
+
+        .btn-cv {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-cv:hover {
+            background: var(--accent-color);
+            color: var(--bg-primary);
+            box-shadow: 0 0 25px var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .hero-img-wrapper {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .hero-img:hover {
+            transform: scale(1.03);
+        }
+
+        /* --- SKILLS & SOFTWARE SECTION --- */
+        #skills {
+            background-color: var(--bg-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- SOFTWARE GRID FIX --- */
+    .software-grid {
+    display: grid;
+    /* Membuat kolom otomatis dengan ukuran seragam */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.5rem;
+    align-items: start; /* Mencegah kartu melar ke bawah */
+    }
+
+    .software-card {
+    background: var(--bg-card);
+    padding: 1.2rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    
+    /* PENTING: Batasi ukuran & sembunyikan gambar yang bocor */
+    height: 140px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    }
+
+    .software-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--accent-glow);
+    }
+
+    /* PENTING: Mengunci ukuran gambar logo/software */
+    .software-card img,
+    .software-icon {
+    width: 50px !important;       /* Paksa lebar gambar max 50px */
+    height: 50px !important;      /* Paksa tinggi gambar max 50px */
+    object-fit: contain !important; /* Biar gambar gak gepeng */
+    margin-bottom: 0.8rem;
+    display: block;
+    }
+
+.software-card p {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin: 0;
+}
+
+        .software-icon {
+    width: 45px;          /* Lebar gambar */
+    height: 45px;         /* Tinggi gambar */
+    object-fit: contain;  /* Menjaga proporsi gambar agar tidak gepeng */
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 5px var(--accent-glow)); /* Efek glow neon tipis */
+    transition: var(--transition);
+}
+
+.software-card:hover .software-icon {
+    transform: scale(1.1); /* Efek membesar sedikit saat di-hover */
+}
+        /* --- EXPERIENCE & ACHIEVEMENTS SECTION --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-subtitle {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        #achievements {
+            background-color: var(--bg-secondary);
+        }
+
+/* --- TIMELINE EXPERIENCE STYLES --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 2rem;
+        }
+
+        /* Garis vertikal timeline */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Titik (Node) Neon pada Garis Timeline */
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            border-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .timeline-org {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Slot Galeri Foto Pengalaman */
+        .timeline-gallery {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .timeline-gallery img {
+            width: 140px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .timeline-gallery img:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+
+        /* --- FOOTER --- */
+        footer {
+            background: #060a12;
+            padding: 3rem 5% 1.5rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1.5rem;
+        }
+
+        /* --- LIGHTBOX MODAL (POPUP FOTO) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- ANIMATION FADE-IN JS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            #hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-info-list li {
+                justify-content: center;
+            }
+            .nav-links {
+                display: none; /* Bisa tambahkan hamburger menu jika diperlukan */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <img src="gambar/bgporto.gif" alt="Graphic BG" class="hero-bg-gif">
+    <div class="hero-overlay"></div>
+    <!-- NAVBAR --> 
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#skills">Keahlian</a></li>
+            <li><a href="#experience">Pengalaman</a></li>
+            <li><a href="#achievements">Prestasi</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO / PROFIL AWAL -->
+    <section id="hero" class="hero-with-gif">
+        <img src="gambar/giphy.gif" alt="Background Graphic" class="hero-bg-gif">
+        <div class="hero-overlay"></div>
+        <div class="hero-text reveal">
+            <span class="badge">Electrical Engineering Student / Engineer</span>
+            <h1>Halo, Saya <br><span>Daniel Hendriko Sirait</span></h1>
+            <p>Mahasiswa teknik elektro dengan ketertarikan pada Internet of Things (IoT) dan Network Engineering</p>
+            
+            <ul class="hero-info-list">
+                <li><i class="fa-solid fa-graduation-cap"></i> UPN "Veteran" Jakarta </li>
+                <li><i class="fa-solid fa-location-dot"></i> Jakarta </li>
+            </ul>
+
+            <!-- TOMBOL CV -->
+            <a href="CV_Nama_Anda.pdf" target="_blank" class="btn-cv">
+                <i class="fa-solid fa-file-arrow-down"></i> Unduh CV Saya
+            </a>
+        </div>
+
+        <div class="hero-img-wrapper reveal">
+            <!-- TEMPLATE FOTO UTAMA -->
+            <img src="gambar/fotoprofil.jpeg" alt="Foto Profil" class="hero-img">
+        </div>
+    </section>
+
+    <!-- SKILLS & SOFTWARE -->
+    <section id="skills">
+        <h2 class="section-title reveal">Skills</h2>
+        
+        <!-- KATEGORI SKILLS -->
+        <div class="skills-grid reveal">
+
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-bolt"></i> Hard Skills</h3>
+                <div class="skill-tags">
+                    <span class="tag">Network Security</span>
+                    <span class="tag">Troubleshooting & Monitoring</span>
+                    <span class="tag">IoT Protocols</span>
+                    <span class="tag">Rangkaian Analog & Digital</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-code"></i> Bahasa Pemrograman</h3>
+                <div class="skill-tags">
+                    <span class="tag">C / C++</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">PHP</span>
+                    <span class="tag">HTML/CSS</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-language"></i> Language Skills</h3>
+                <div class="skill-tags">
+                    <span class="tag">Bahasa (Native)</span>
+                    <span class="tag">English (Upper-Intermediate)</span>
+                    <span class="tag">German (Elementary Proficiency)</span>
+                </div>
+            </div>
+
+
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-gears"></i> Soft Skills</h3>
+                <div class="skill-tags">
+                    <span class="tag">Troubleshooting</span>
+                    <span class="tag">Manajemen Proyek</span>
+                    <span class="tag">Teamwork</span>
+                    <span class="tag">Analisis Data</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGO SOFTWARE (Dapat diganti ikon/judulnya) -->
+        <h3 style="margin-bottom: 1.5rem; color: var(--text-muted);" class="reveal">Software & Tools</h3>
+        <div class="software-grid reveal">
+            <!-- Item 1 -->
+            <div class="software-card">
+                <img src= "gambar/ciscopackettracer.png" alt ="Cisco Packet Tracer" class="software-icon">
+                <p>Cisco Packet Tracer</p>
+            </div>
+            <!-- Item 2 -->
+            <div class="software-card">
+                <img src="gambar/wireshark.png" alt="Wireshark" class="reveal" class="software-icon">
+                <p>Wireshark</p>
+            </div>
+
+            <div class="software-card">
+                <img src="gambar/arduino.png" alt="Arduino IDE" class="reveal" class="software-icon">
+                <p>Arduino IDE</p>
+            </div>
+
+            <div class="software-card">
+                <img src="gambar/nmap.png" alt="Arduino IDE" class="reveal" class="software-icon">
+                <p>Nmap</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE (TIMELINE KRONOLOGIS) -->
+    <section id="experience">
+        <h2 class="section-title reveal">Pengalaman</h2>
+        
+        <div class="timeline reveal">
+            
+            <!-- Pengalaman 1 (Terbaru) -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2026 - Sekarang</div>
+                <div class="timeline-content">
+                    <h3>Head Of Network Engineer Division</h3>
+                    <span class="timeline-org">KSM Internet of Things UPNVJ</span>
+                    <p>Bertanggung jawab dalam perancangan infrastruktur dan keamanan jaringan pada suatu proyek, selain itu saya juga mengadakan pelatihan bagi anggota divisi untuk meningkatkan kompetensi teknis dari para anggota.</p>
+                    
+                    <!-- Slot Foto Dokumentasi Pengalaman -->
+                    <div class="timeline-gallery">
+                        <img src="gambar/rapatiot1.jpeg" alt="Dokumentasi 1" onclick="openModal(this.src)">
+                        <img src="gambar/rapatiot2.jpeg" alt="Dokumentasi 2" onclick="openModal(this.src)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pengalaman 2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2023 - 2024</div>
+                <div class="timeline-content">
+                    <h3>Vice Chairman</h3>
+                    <span class="timeline-org">Kelompok Ilmiah Remaja SMAN 87 Jakarta</span>
+                    <p>Mengelola ekstrakurikuler yang berfokus pada serangkaian eksperimen ilmiah dan perancangan karya tulis ilmiah</p>
+                    
+                    <!-- Slot Foto Dokumentasi Pengalaman -->
+                    <div class="timeline-gallery">
+                        <img src="gambar/kir1.jpeg" alt="Dokumentasi Lab" onclick="openModal(this.src)">
+                        <img src="gambar/kir2.jpeg" alt="Dokumentasi Lab" onclick="openModal(this.src)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+        <h2 class="section-title reveal">Prestasi & Sertifikasi</h2>
+
+        <div class="cards-grid reveal">
+            <!-- Prestasi 1 -->
+            <div class="card">
+                <img src="gambar/sertiffisika.jpg" alt="Sertifikat" class="card-img" onclick="openModal(this.src)">
+                <div class="card-body">
+                    <h3>Medali Perak - Isaac Netwon Competition Bidang Fisika tingkat Nasional oleh HIMAKA Universitas Padjajaran </h3>
+                    <div class="card-subtitle">Akademik • 2023</div>
+                    <p>Berhasil mendapatkan medali perak pada lomba fisika tingkat nasional.</p>
+                </div>
+            </div>
+
+            <!-- Prestasi 2 -->
+            <div class="card">
+                <img src="gambar/gitarjuara2.jpg" alt="Sertifikat" class="card-img" onclick="openModal(this.src)">
+                <div class="card-body">
+                    <h3>Juara 2 - FLS2N 2024 Cabang Gitar Solo Tingkat Jakarta Selatan 1</h3>
+                    <div class="card-subtitle">Seni • 2024</div>
+                    <p>Berhasil menempati peringkat atau juara 2 pada lomba FLS2N 2024 cabang Gitar Solo di tingkat Jakarta Selatan 1</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="gambar/sertifbinggris.jpg" alt="Sertifikat" class="card-img" onclick="openModal(this.src)">
+                <div class="card-body">
+                    <h3>Finalis - English Speech Competition tingkat Nasional oleh Dirjen PDASRH Kementerian Lingkungan Hidup dan Kehutanan</h3>
+                    <div class="card-subtitle">Bahasa • 2023</div>
+                    <p>Berhasil menempati peringkat atau juara 2 pada lomba FLS2N 2024 cabang Gitar Solo di tingkat Jakarta Selatan 1</p>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </section>
+
+    <!-- FOOTER / KONTAK -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h2>Let's Connect !</h2>
+            <p style="color: var(--text-muted);">Terbuka untuk kolaborasi, proyek, atau peluang kerja.</p>
+            
+            <div class="social-links">
+                <a href="mailto:emailanda@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/username" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/username" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://instagram.com/username" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-copy">
+            &copy; Designed by Daniel Hendriko Sirait
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL (UNTUK POPUP FOTO SAAT DIKLIK) -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <!-- JAVASCRIPT EFEK & INTERAKSI -->
+    <script>
+        // 1. EFEK TRANSISI SCROLL (REVEAL ANIMATION)
+        window.addEventListener('scroll', revealOnScroll);
+
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 100; // Sensitivitas trigger
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        // Trigger sekali saat load
+        revealOnScroll();
+
+        // 2. LIGHTBOX / POPUP FOTO SAAT GAMBAR DIKLIK
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+
+        function openModal(src) {
+            modal.style.display = "flex";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Tutup modal jika klik luar gambar
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
