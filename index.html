@@ -465,43 +465,19 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 50%
+            left: 7px;
             top: 0;
             bottom: 0;
             width: 2px;
             background: var(--border-color);
-            transform: translateX(-50%);
         }
 
         .timeline-item {
             position: relative;
-            width: 50%
-            padding: 1rem 2.5rem;
-            box-sizing: border-box;
-            margin-bottom: 1.5rem;
-        }
-        .timeline-item.left {
-        left: 0;
-        text-align: right;
-        }
-        
-        .timeline-item.right {
-        left: 50%;
-        text-align: left;
+            margin-bottom: 2.5rem;
         }
 
-        .timeline-item.left .timeline-dot {
-        right: -8px;
-        }
-
-        .timeline-item.right .timeline-dot {
-        left: -8px;
-        }
-        
-        .timeline-item.left .timeline-gallery {
-        justify-content: flex-end;
-        }
-
+        /* Titik (Node) Neon pada Garis Timeline */
         .timeline-dot {
             position: absolute;
             left: -2rem;
@@ -800,7 +776,7 @@
         <div class="timeline reveal">
             
             <!-- Pengalaman 1 (Terbaru) -->
-            <div class="timeline-item left">
+            <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2026 - Sekarang</div>
                 <div class="timeline-content">
@@ -817,7 +793,7 @@
             </div>
 
             <!-- Pengalaman 2 -->
-            <div class="timeline-item right">
+            <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-date">2023 - 2024</div>
                 <div class="timeline-content">
@@ -856,7 +832,7 @@
                 <div class="card-body">
                     <h3>Juara 2 - FLS2N 2024 Cabang Gitar Solo Tingkat Jakarta Selatan 1</h3>
                     <div class="card-subtitle">Seni • 2024</div>
-                    <p>Berhasil menempati peringkat atau Juara 2 pada lomba FLS2N 2024 cabang Gitar Solo di tingkat Jakarta Selatan 1</p>
+                    <p>Berhasil menempati peringkat atau juara 2 pada lomba FLS2N 2024 cabang Gitar Solo di tingkat Jakarta Selatan 1</p>
                 </div>
             </div>
             <div class="card">
@@ -864,7 +840,7 @@
                 <div class="card-body">
                     <h3>Finalis - English Speech Competition tingkat Nasional oleh Dirjen PDASRH Kementerian Lingkungan Hidup dan Kehutanan</h3>
                     <div class="card-subtitle">Bahasa • 2023</div>
-                    <p>Berhasil menjadi Finalis untuk kompetisi pidato Bahasa Inggris tingkat nasional bertemakan "Indonesia's Mangroves For The Earth, The People, and The World"  yang diselenggarakan oleh Dirjen PDARSH Kementerian Lingkungan Hidup dan Kehutanan</p>
+                    <p>Berhasil menjadi finalis pada kompetisi pidato Bahasa Inggris tingkat nasional yang diselenggarakan oleh Dirjen PDASRH Kementerian Lingkungan Hidup dan Kehutanan</p>
                 </div>
             </div>
 
